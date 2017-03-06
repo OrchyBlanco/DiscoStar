@@ -29,13 +29,13 @@ namespace DiscoStar.WebApi.Models
         public string Audio { get; set; }
         public Nullable<int> IdInterprete { get; set; }
     
-      //  [JsonIgnore]
-        public virtual Interprete Interprete { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         [JsonIgnore]
+        public virtual Interprete Interprete { get; set; }
+        
+         [JsonIgnore]
         public virtual ICollection<DiscoTipo> DiscoTipoes { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        [JsonIgnore]
+       // [JsonIgnore]
         public virtual ICollection<Puntuacion> Puntuacions { get; set; }
     }
 }

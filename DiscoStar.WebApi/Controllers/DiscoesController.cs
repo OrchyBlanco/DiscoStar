@@ -10,20 +10,35 @@ using System.Threading.Tasks;
 using System.Web.Http;
 using System.Web.Http.Description;
 using DiscoStar.WebApi.Models;
+using System.Linq.Expressions;
 
 namespace DiscoStar.WebApi.Controllers
 {
+    [RoutePrefix("api/Discos")]
     public class DiscoesController : ApiController
     {
         private DiscosEntities db = new DiscosEntities();
 
-        // GET: api/Discoes
+        
+        // GET: api/Discos
+        [Route("")]
         public IQueryable<Disco> GetDiscoes()
-        {
+        {            
             return db.Discoes;
         }
 
-        // GET: api/Discoes/5
+        // GET: api/Discos/Top
+        [Route("Top")]
+        [ResponseType(typeof(Disco))]
+        public IList<Disco> GetTopDisco()
+        {
+            string consulta = "SELECT TOP 6 Disco.IdDisco ,Disco.Titulo,Disco.Agno,Disco.Imagen,Disco.Audio,Disco.IdInterprete,sum(Puntuacion.Puntuacion) as Puntos FROM Disco INNER JOIN Puntuacion on Disco.IdDisco = Puntuacion.iddisco group by Disco.IdDisco,Disco.Titulo,Disco.Agno,Disco.Imagen,Disco.Audio,Disco.IdInterprete order by sum(Puntuacion.Puntuacion) desc ";     
+            var top = db.Discoes.SqlQuery(consulta).ToList();
+            return top;
+        }
+
+        // GET: api/Discos/5
+        [Route("{id:int}")]
         [ResponseType(typeof(Disco))]
         public async Task<IHttpActionResult> GetDisco(int id)
         {
