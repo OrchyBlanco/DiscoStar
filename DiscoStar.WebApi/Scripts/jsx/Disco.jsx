@@ -1,14 +1,24 @@
-﻿var CajaDisco = React.createClass({
-    render: function () {
+﻿var CajaDiscoTop = React.createClass({
+    render : function(){
         return (
-                <div className="CajaDiscos">
-                    ESTA ES LA CAJA DE DISCOS
+                <div className="discosTop">
+                    Hola
                 </div>
             );
     }
 });
 
-ReactDOM.render(
-    <CajaDisco/>,document.getElementById('content')
+var CajaDisco=React.createClass({
+    render : function(){
+        return (
+                <div className="discosTop">
+                    Hola
+                </div>
+            );
+    }
+});
+
+React.render(
+    <CajaDiscoTop/>,document.getElementById('content')
     
     );
